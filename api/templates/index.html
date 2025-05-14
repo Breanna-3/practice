@@ -1,0 +1,188 @@
+
+<h1><a href="/" style="color: #66fcf1; text-decoration: none;">🎬 DPR</a></h1>
+
+{% set filter_form %}
+  <label for="genre">Genre:</label>
+  <select name="genre" id="genre">
+    <option value="">All</option>
+    {% for genre in genres %}
+      <option value="{{ genre }}" {% if genre == selected_genre %}selected{% endif %}>{{ genre }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="showType">Show Type:</label>
+  <select name="showType" id="showType">
+    <option value="">All</option>
+    {% for t in show_types %}
+      <option value="{{ t }}" {% if t == selected_show_type %}selected{% endif %}>{{ t }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="sort">Sort by:</label>
+  <select name="sort" id="sort">
+    <option value="name" {% if selected_sort == 'name' %}selected{% endif %}>Name</option>
+    <option value="popularity" {% if selected_sort == 'popularity' %}selected{% endif %}>Popularity</option>
+    <option value="release" {% if selected_sort == 'release' %}selected{% endif %}>Release Date</option>
+    <option value="highest" {% if selected_sort == 'highest' %}selected{% endif %}>Highest Rated</option>
+    <option value="lowest" {% if selected_sort == 'lowest' %}selected{% endif %}>Lowest Rated</option>
+  </select>
+
+  <label for="year">Year:</label>
+  <select name="year" id="year">
+    <option value="">All</option>
+    {% for y in years %}
+      <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>{{ y }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="language">Language:</label>
+  <select name="language" id="language">
+    <option value="">All</option>
+    {% for lang in languages %}
+      <option value="{{ lang }}" {% if lang == selected_language %}selected{% endif %}>{{ lang }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="country">Country:</label>
+  <select name="country" id="country">
+    <option value="">All</option>
+    {% for c in countries %}
+      <option value="{{ c }}" {% if c == selected_country %}selected{% endif %}>{{ c }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="runtime">Runtime:</label>
+  <select name="runtime" id="runtime">
+    <option value="">All</option>
+    <option value="short" {% if selected_runtime == 'short' %}selected{% endif %}>≤ 30 min</option>
+    <option value="medium" {% if selected_runtime == 'medium' %}selected{% endif %}>31–60 min</option>
+    <option value="long" {% if selected_runtime == 'long' %}selected{% endif %}>Over 60 min</option>
+  </select>
+
+  <label for="network">Network:</label>
+  <select name="network" id="network">
+    <option value="">All</option>
+    {% for net in networks %}
+      <option value="{{ net }}" {% if net == selected_network %}selected{% endif %}>{{ net }}</option>
+    {% endfor %}
+  </select>
+{% endset %}
+
+{% block content %}
+<h1><a href="/" style="color: #66fcf1; text-decoration: none;">🎬 DPR</a></h1>
+
+<form method="get">
+  <label for="genre">Genre:</label>
+  <select name="genre" id="genre">
+    <option value="">All</option>
+    {% for genre in genres %}
+      <option value="{{ genre }}" {% if genre == selected_genre %}selected{% endif %}>{{ genre }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="showType">Show Type:</label>
+  <select name="showType" id="showType">
+    <option value="">All</option>
+    {% for t in show_types %}
+      <option value="{{ t }}" {% if t == selected_show_type %}selected{% endif %}>{{ t }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="sort">Sort by:</label>
+  <select name="sort" id="sort">
+    <option value="name" {% if selected_sort == 'name' %}selected{% endif %}>Name</option>
+    <option value="popularity" {% if selected_sort == 'popularity' %}selected{% endif %}>Popularity</option>
+    <option value="release" {% if selected_sort == 'release' %}selected{% endif %}>Release Date</option>
+    <option value="highest" {% if selected_sort == 'highest' %}selected{% endif %}>Highest Rated</option>
+    <option value="lowest" {% if selected_sort == 'lowest' %}selected{% endif %}>Lowest Rated</option>
+  </select>
+
+  <label for="year">Year:</label>
+  <select name="year" id="year">
+    <option value="">All</option>
+    {% for y in years %}
+      <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>{{ y }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="language">Language:</label>
+  <select name="language" id="language">
+    <option value="">All</option>
+    {% for lang in languages %}
+      <option value="{{ lang }}" {% if lang == selected_language %}selected{% endif %}>{{ lang }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="country">Country:</label>
+  <select name="country" id="country">
+    <option value="">All</option>
+    {% for c in countries %}
+      <option value="{{ c }}" {% if c == selected_country %}selected{% endif %}>{{ c }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="runtime">Runtime:</label>
+  <select name="runtime" id="runtime">
+    <option value="">All</option>
+    <option value="short" {% if selected_runtime == 'short' %}selected{% endif %}>≤ 30 min</option>
+    <option value="medium" {% if selected_runtime == 'medium' %}selected{% endif %}>31–60 min</option>
+    <option value="long" {% if selected_runtime == 'long' %}selected{% endif %}>Over 60 min</option>
+  </select>
+
+  <label for="network">Network:</label>
+  <select name="network" id="network">
+    <option value="">All</option>
+    {% for net in networks %}
+      <option value="{{ net }}" {% if net == selected_network %}selected{% endif %}>{{ net }}</option>
+    {% endfor %}
+  </select>
+
+  <button type="submit">Filter</button>
+</form>
+
+<hr>
+
+<h2>Shows</h2>
+{% for show in shows %}
+  <div class="show">
+    <a href="/show/{{ show.id }}">
+      <img src="{{ show.image or '' }}" alt="{{ show.name }}">
+      <p>{{ show.name }}</p>
+    </a>
+  </div>
+{% endfor %}
+{% endblock %}
+
+{% if total_pages > 1 %}
+<footer style="margin-top: 40px; text-align: center;">
+  <div>
+    {% set start = current_page - 3 if current_page > 3 else 1 %}
+    {% set end = current_page + 3 if current_page + 3 < total_pages else total_pages %}
+
+    {% if current_page > 1 %}
+      <a href="?genre={{ selected_genre }}&showType={{ selected_show_type }}&sort={{ selected_sort }}&year={{ selected_year }}&language={{ selected_language }}&country={{ selected_country }}&runtime={{ selected_runtime }}&network={{ selected_network }}&page=1" class="pagination-button">« First</a>
+      <a href="?genre={{ selected_genre }}&showType={{ selected_show_type }}&sort={{ selected_sort }}&year={{ selected_year }}&language={{ selected_language }}&country={{ selected_country }}&runtime={{ selected_runtime }}&network={{ selected_network }}&page={{ current_page - 1 }}" class="pagination-button">‹ Prev</a>
+    {% endif %}
+
+    {% if start > 1 %}
+      <span class="pagination-button">...</span>
+    {% endif %}
+
+    {% for p in range(start, end + 1) %}
+      <a href="?genre={{ selected_genre }}&showType={{ selected_show_type }}&sort={{ selected_sort }}&year={{ selected_year }}&language={{ selected_language }}&country={{ selected_country }}&runtime={{ selected_runtime }}&network={{ selected_network }}&page={{ p }}"
+         class="pagination-button {% if p == current_page %}pagination-active{% else %}pagination-inactive{% endif %}">
+        {{ p }}
+      </a>
+    {% endfor %}
+
+    {% if end < total_pages %}
+      <span class="pagination-button">...</span>
+    {% endif %}
+
+    {% if current_page < total_pages %}
+      <a href="?genre={{ selected_genre }}&showType={{ selected_show_type }}&sort={{ selected_sort }}&year={{ selected_year }}&language={{ selected_language }}&country={{ selected_country }}&runtime={{ selected_runtime }}&network={{ selected_network }}&page={{ current_page + 1 }}" class="pagination-button">Next ›</a>
+      <a href="?genre={{ selected_genre }}&showType={{ selected_show_type }}&sort={{ selected_sort }}&year={{ selected_year }}&language={{ selected_language }}&country={{ selected_country }}&runtime={{ selected_runtime }}&network={{ selected_network }}&page={{ total_pages }}" class="pagination-button">Last »</a>
+    {% endif %}
+  </div>
+</footer>
+{% endif %}
