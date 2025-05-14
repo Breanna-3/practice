@@ -1,46 +1,81 @@
-# DPR Project – Full Stack TV Show Explorer
+# 🎬 TV Show Explorer Project
+
+This project allows users to explore TV shows using a Flask backend connected to a SQLite database and an Astro/React frontend.
 
 ## 📁 Project Structure
 
-- **/notebooks/**
-  - `01_database_setup.ipynb` – Sets up the normalized SQLite database with pandas + SQLite.
-  - `02_api_tester.ipynb` – Tests external API (TVmaze) to gather and validate show data.
+```
+tv_project/
+├── api/
+│   ├── app.py                # Flask application
+│   ├── tools.py              # SQLite helper tools
+│   ├── populate_db.py        # Downloads data from TVmaze API
+│   └── templates/            # HTML templates for Flask
+│       ├── base.html
+│       ├── index.html
+│       ├── show.html
+│       └── creators.html
+├── frontend/
+│   └── src/
+│       ├── components/
+│       │   └── ShowCard.jsx  # React component for shows
+│       └── pages/
+│           └── index.astro   # Home page to render shows
+├── notebooks/
+│   ├── setup_database.ipynb  # (Optional) Setup notebook
+│   └── api_tester.ipynb      # (Optional) API test notebook
+└── data.csv                  # Exported data from TVmaze
+```
 
-- **/flask_app/**
-  - `app.py` – Flask backend with show filters and pagination.
-  - `models.py` – SQLAlchemy object class for the TV show model.
-  - `populate_db.py` – Downloads and saves shows from TVmaze into the SQLite DB.
-  - `data.db` – SQLite database file.
-  - **/static/images/** – Assets such as logos or creator profile images.
-  - **/templates/** – Jinja2 templates: `index.html`, `creators.html`, `base.html`
+## ✅ Setup Instructions
 
-- **/frontend/**
-  - Starter directory for Astro project with React components (requires Node setup).
+### 1. Install Python dependencies
+```bash
+pip install flask flask_sqlalchemy flask_migrate pandas requests
+```
 
-## 🛠 Technologies Used
+### 2. Run Data Population
+```bash
+cd api
+python populate_db.py
+```
 
-- Python + Flask + SQLite (Backend)
-- Astro + React (Frontend)
-- TVmaze API (Data Source)
-- Jupyter (Documentation & Testing)
+### 3. Start Flask App
+```bash
+python app.py
+```
+Visit: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
-## ✅ Features
+---
 
-- Browse & search TV shows by genre, type, country, etc.
-- View paginated and sorted lists of popular shows
-- Creator bio page with local images
-- Fully normalized database setup
-- API fetch & test notebooks
-- React frontend integration plan
+### 4. Astro Frontend (Optional)
 
-## 🚀 Setup Instructions
+#### Prerequisite: Node.js
 
-1. Clone this repo or unzip the files
-2. Set up a Python environment and install requirements
-3. Run `populate_db.py` to create your SQLite DB
-4. Start Flask server via `python app.py`
-5. (Optional) Navigate to `/frontend/` and run `npm install && npm run dev`
+```bash
+cd frontend
+npm create astro@latest
+npm install
+npm run dev
+```
 
-## 🧠 Author Notes
+Ensure Flask is running on port 5000 for frontend to fetch data.
 
-This project is designed for full-stack delivery of structured data via Python and visualization via Astro. It meets both technical and UX requirements for coursework or portfolio use.
+---
+
+## 📚 Features
+- Filter by genre, language, runtime, network, country, show type
+- Sort shows by popularity, rating, release
+- Show detail page
+- Creators page
+
+---
+
+## 👩‍💻 Authors
+- Ammal, Breanna, Chloe Zhang
+
+---
+
+## 🗃️ Data Source
+Powered by [TVmaze API](https://www.tvmaze.com/api)
+
