@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ show.name }}</h1>
+{% if show.image %}
+  <img src="{{ show.image }}" alt="{{ show.name }}" style="max-height: 300px;">
+{% endif %}
+<p><strong>Summary:</strong> {{ show.summary|safe }}</p>
+<p><strong>Genres:</strong> {{ show.genres }}</p>
+<p><strong>Type:</strong> {{ show.showType }}</p>
+<p><strong>Rating:</strong> {{ show.rating }}</p>
+<p><strong>Premiered:</strong> {{ show.premiered }}</p>
+<p><strong>Language:</strong> {{ show.language }}</p>
+<p><strong>Country:</strong> {{ show.country }}</p>
+<p><strong>Network:</strong> {{ show.network }}</p>
+{% endblock %}
